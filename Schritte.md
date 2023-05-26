@@ -4,3 +4,5 @@
 4. Die Audio Dateinen in Sprachen Ordner schieben
 5. Die Audio Dateinen innerhalb eines Sprachenordner im Bulk mit Whisper abarbeiten
 6. Json Datein in ClipIndex Projekt importieren
+
+E1. Löscht alle Audio Dateinen welche bereits eine json Datei haben
