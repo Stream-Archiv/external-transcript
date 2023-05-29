@@ -16,17 +16,17 @@ for folder in $(find "$input_dir" -maxdepth 1 -type d); do
 
     while [[ $(find "$folder" -maxdepth 1 -type f | wc -l) -gt 0 ]]; do
         files=$(find "$folder" -maxdepth 1 -type f -name "*.m4a" -printf "../%h/%f\n" | head -n "$chunk_size")
-        pushd "whisper-tmp"
+        pushd "whisper-tmp" > /dev/null
         echo "Start transcribing."
         echo "$files" | xargs whisper --model "$model" --device "$device" --language "$sprache" > /dev/null
         mkdir -p "../$folder/finished/"
         echo "$files" | xargs -I{} mv {} "../$folder/finished"
-        popd
+        popd > /dev/null
 
         file_counter=$((file_counter + $chunk_size))
         echo "Transcribed $chunk_size audios. Total $file_counter files processed."
         
-        pushd "whisper-tmp"
+        pushd "whisper-tmp" > /dev/null
         for file in $(find -maxdepth 1 -type f -name "*.txt"); do
             # Erzeuge json
             output_file="../$outdir_dir/$(echo "$file" | sed 's/txt/json/')"
@@ -40,7 +40,7 @@ for folder in $(find "$input_dir" -maxdepth 1 -type d); do
         rm *.vtt
         rm *.json
         rm *.tsv
-        popd
+        popd > /dev/null
         zip -q -FS -r ../drive/MyDrive/json.zip json/
     done
 
