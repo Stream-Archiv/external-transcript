@@ -41,6 +41,7 @@ for folder in $(find "$input_dir" -maxdepth 1 -type d); do
         rm *.json
         rm *.tsv
         popd
+        zip -FS -r drive/MyDrive/json.zip json/
     done
 
 
